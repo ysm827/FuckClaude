@@ -118,26 +118,26 @@ export const SPONSORS: Sponsor[] = [
     },
   },
   {
-    id: 'nexkj',
-    name: 'Nex科技',
+    id: 'nexsms',
+    name: 'NexSMS',
     url: {
-      zh: 'https://nexkj.net',
-      en: 'https://nexkj.net/en/',
+      zh: 'https://nexsms.net/',
+      en: 'https://nexsms.net/en/',
     },
-    logo: '/sponsors/nexkj-wordmark-340x108.png',
+    logo: '/sponsors/nexsms-wordmark-340x126.png',
     logoWidth: 340,
-    logoHeight: 108,
+    logoHeight: 126,
     headline: {
-      zh: '打造企业级互联网出海增长引擎。',
-      en: 'Enterprise growth stack for global expansion.',
+      zh: '全球号码即刻接收验证码。',
+      en: 'Global numbers, instant SMS verification.',
     },
     tagline: {
-      zh: '代理IP、指纹浏览器、短信接码、AI 社媒 SCRM 与 GPU 算力，一站式全球化增长能力',
-      en: 'Proxy IP, anti-detect browser, SMS verification, AI SCRM & GPU compute — one integrated system for going global',
+      zh: '覆盖 200+ 国家，50 万+ 活跃号码，无需 KYC，支持 ChatGPT / Telegram / WhatsApp 等上万种平台',
+      en: '200+ countries, 500k+ active numbers, no KYC — supports ChatGPT, Telegram, WhatsApp & 10k+ platforms',
     },
     cta: {
-      zh: '了解更多',
-      en: 'Learn more',
+      zh: '免费体验',
+      en: 'Try free',
     },
   },
 ];
