@@ -11,6 +11,8 @@ export interface NewsItem {
   publishedAt: string;
   title: { en: string; zh: string };
   summary: { en: string; zh: string };
+  takeaway?: { en: string; zh: string };
+  relatedGuideSlug?: string;
   sourceUrl: string;
   sourceName: string;
 }
@@ -24,6 +26,65 @@ export const NEWS_CATEGORIES: Record<NewsCategory, { en: string; zh: string }> =
 
 export const CLAUDE_NEWS: NewsItem[] = [
   {
+    id: 'sdk-files-skills-ga-and-api-keys',
+    category: 'api',
+    publishedAt: '2026-08-27',
+    title: {
+      en: 'Files & Skills SDK paths go GA; personal and service account API keys launch',
+      zh: 'Files / Skills SDK 路径转正 GA，个人密钥与服务账号密钥上线',
+    },
+    summary: {
+      en: 'In Python SDK 1.2.0, TypeScript SDK 0.122.0, and matching Go/Java/Ruby/C# releases, `client.beta.files` and `client.beta.skills` no longer send beta headers and mirror `client.files` and `client.skills`. Beta `BetaSkill` is renamed `BetaContainerSkill`, and `client.beta.skills.delete()` now removes a Skill and all its versions. The Claude Console also supports personal keys and service account keys scoped to workspaces or admin endpoints.',
+      zh: 'Python SDK 1.2.0、TypeScript SDK 0.122.0 及对应 Go/Java/Ruby/C# 版本中，`client.beta.files` 与 `client.beta.skills` 不再发送 beta 请求头，行为与 `client.files`、`client.skills` 一致。Beta 类型 `BetaSkill` 重命名为 `BetaContainerSkill`，`client.beta.skills.delete()` 会删除 Skill 及其全部版本。Claude Console 同时支持个人密钥与服务账号密钥，可按工作区或管理员端点授权。',
+    },
+    takeaway: {
+      en: 'Remove `files-api-2025-04-14` and `skills-2025-10-02` beta headers from production SDK calls and migrate to the stable client paths.',
+      zh: '从生产 SDK 调用中移除 `files-api-2025-04-14` 与 `skills-2025-10-02` beta 头，并迁移至稳定 client 路径。',
+    },
+    relatedGuideSlug: 'api-advanced-optimization',
+    sourceUrl: 'https://platform.claude.com/docs/en/release-notes/overview',
+    sourceName: 'Anthropic Docs',
+  },
+  {
+    id: 'compliance-api-ga-admin-api-sdks',
+    category: 'api',
+    publishedAt: '2026-08-26',
+    title: {
+      en: 'Compliance API session endpoints exit beta; Admin API arrives in SDKs and ant CLI',
+      zh: 'Compliance API 会话端点转正；Admin API 登陆 SDK 与 ant CLI',
+    },
+    summary: {
+      en: 'Cowork and Claude Code Compliance API session endpoints are now GA. Local session endpoints also return Claude Science and Claude for Microsoft 365 transcripts (beta, Enterprise). The Admin API is available in the `ant` CLI and Python, TypeScript, C#, Go, Java, PHP, and Ruby SDKs under `client.beta.organization`, covering members, workspaces, API keys, rate limits, and service accounts.',
+      zh: 'Cowork 与 Claude Code 的 Compliance API 会话端点已 GA。本地会话端点亦返回 Claude Science 与 Claude for Microsoft 365 会话记录（beta，Enterprise）。Admin API 已在 `ant` CLI 及 Python、TypeScript、C#、Go、Java、PHP、Ruby SDK 的 `client.beta.organization` 下提供，涵盖成员、工作区、API 密钥、速率限制与服务账号管理。',
+    },
+    takeaway: {
+      en: 'Enterprise admins can automate org governance via SDK Admin API calls instead of curl-only workflows.',
+      zh: 'Enterprise 管理员可通过 SDK Admin API 自动化组织治理，无需再依赖纯 curl 流程。',
+    },
+    relatedGuideSlug: 'automation-safety-practices',
+    sourceUrl: 'https://platform.claude.com/docs/en/release-notes/overview',
+    sourceName: 'Anthropic Docs',
+  },
+  {
+    id: 'cowork-memory-editable-topics',
+    category: 'product',
+    publishedAt: '2026-08-25',
+    title: {
+      en: 'Claude Cowork memory syncs across chat; topics editable with sensitive-topic controls',
+      zh: 'Claude Cowork 记忆跨 Chat 同步，Topics 可编辑并支持敏感主题控制',
+    },
+    summary: {
+      en: 'Memory now works across chat and Cowork in the cloud. All remembered items appear under Topics in Settings > Memory, where users can edit or delete entries. Health- or belief-related topics stay out of memory unless "Include sensitive topics" is enabled. Memory is on by default for Free, Pro, and Max; off by default for Team and Enterprise.',
+      zh: '记忆功能现已在 Chat 与云端 Cowork 间同步。所有记忆条目可在 Settings > Memory 的 Topics 中查看、编辑或删除。健康、信仰等敏感主题默认不写入记忆，需开启「Include sensitive topics」才会收录。Free / Pro / Max 默认开启记忆；Team / Enterprise 默认关闭。',
+    },
+    takeaway: {
+      en: 'Review your organization memory defaults before rolling Cowork to Team or Enterprise users.',
+      zh: '向 Team / Enterprise 用户推广 Cowork 前，请先确认组织的记忆功能默认策略。',
+    },
+    sourceUrl: 'https://docs.anthropic.com/en/release-notes/claude-apps',
+    sourceName: 'Anthropic Help Center',
+  },
+  {
     id: 'python-sdk-v1-0',
     category: 'api',
     publishedAt: '2026-08-20',
@@ -35,6 +96,11 @@ export const CLAUDE_NEWS: NewsItem[] = [
       en: 'Anthropic released Python SDK v1.0: the HTTP layer moves from httpx to the maintained httpx2 fork (requires Python 3.10+). Long-deprecated surface is removed, including the legacy Text Completions API, `temperature`/`top_p`/`top_k` on Messages, and the tool runner\'s client-side `compaction_control`. Async `.with_raw_response` now needs `await response.parse()`. See the v1 migration guide for full breaking changes.',
       zh: 'Anthropic 发布 Python SDK v1.0：HTTP 层从 httpx 迁至维护中的 httpx2 分支（需 Python 3.10+）。移除长期弃用接口，含旧 Text Completions API、Messages 上的 `temperature`/`top_p`/`top_k`，以及 tool runner 客户端 `compaction_control`。异步 `.with_raw_response` 现需 `await response.parse()`。完整破坏性变更见 v1 迁移指南。',
     },
+    takeaway: {
+      en: 'Upgrade older pipelines from /v1/complete to /v1/messages before updating the SDK dependency in production.',
+      zh: '在生产环境升级 SDK 前，请确保所有旧调用已彻底从 /v1/complete 迁移至 /v1/messages。',
+    },
+    relatedGuideSlug: 'claude-code-and-api-safety',
     sourceUrl: 'https://platform.claude.com/docs/en/release-notes/overview',
     sourceName: 'Anthropic Docs',
   },
@@ -47,9 +113,14 @@ export const CLAUDE_NEWS: NewsItem[] = [
       zh: 'Computer use、browser use、Files API 与 Agent Skills 正式 GA',
     },
     summary: {
-      en: 'Anthropic graduated four major platform features: computer use (`computer_toolset_20260801`) and a new browser use toolset no longer need beta headers; Files API and Agent Skills (/v1/skills) are GA too. All four work on Fable 5, Mythos 5, Opus 5, and Sonnet 5.',
-      zh: 'Anthropic 将四项平台能力正式 GA：computer use（`computer_toolset_20260801`）与全新 browser use 工具集不再需要 beta header；Files API 与 Agent Skills（/v1/skills）亦同步转正。四项能力均支持 Fable 5、Mythos 5、Opus 5 与 Sonnet 5。',
+      en: 'Anthropic graduated four major platform features: computer use (`computer_toolset_20260801`) and browser use (`browser_toolset_20260801`) no longer need beta headers; Files API and Agent Skills (`/v1/skills`) are GA too. All four are available on Fable 5, Mythos 5, Opus 5, Sonnet 5, and Opus 4.8.',
+      zh: 'Anthropic 将四项平台能力正式 GA：computer use（`computer_toolset_20260801`）与 browser use（`browser_toolset_20260801`）不再需要 beta header；Files API 与 Agent Skills（`/v1/skills`）亦同步转正。四项能力均已在 Fable 5、Mythos 5、Opus 5、Sonnet 5 与 Opus 4.8 上提供。',
     },
+    takeaway: {
+      en: 'Beta request headers can now be removed from production workloads invoking computer use and tool capabilities.',
+      zh: '在调用 Computer Use 与工具集时，可以从生产代码中安全移除相关的 anthropic-beta 请求头。',
+    },
+    relatedGuideSlug: 'automation-safety-practices',
     sourceUrl: 'https://platform.claude.com/docs/en/release-notes/overview',
     sourceName: 'Anthropic Docs',
   },
@@ -62,9 +133,14 @@ export const CLAUDE_NEWS: NewsItem[] = [
       zh: 'Claude 文本水印全球上线，配合 EU AI Act 透明度要求',
     },
     summary: {
-      en: 'New Claude models embed an invisible SynthID-Text watermark in generated text, applied globally (not EU-only). The mark carries no user or org identifiers and adds no extra tokens; older models will receive watermarking over the coming months.',
-      zh: '新 Claude 模型在生成文本中嵌入不可见的 SynthID-Text 水印，全球生效（非仅限欧盟）。水印不含用户或组织标识、不增加 token 消耗；旧模型将在未来数月内逐步补齐。',
+      en: 'New Claude models embed an invisible SynthID-Text statistical watermark in generated text, applied globally (not EU-only) to meet AI transparency regulations. The mark carries no user or org identifiers and adds no extra tokens; detection and verification tools are now standardized.',
+      zh: '新 Claude 模型在生成文本中嵌入不可见的 SynthID-Text 统计水印，全球生效（非仅限欧盟），以符合欧盟 AI 法案第 50 条透明度规范。水印不含用户或组织标识、不增加 token 消耗，常规同义词替换难以破坏其统计特征。',
     },
+    takeaway: {
+      en: 'Review our watermarking detection guide for techniques on identifying and safely handling generated content.',
+      zh: '如需识别和合规处理生成的文本水印，可查阅本站的 AI 内容水印深度指南。',
+    },
+    relatedGuideSlug: 'claude-ai-content-watermarking',
     sourceUrl: 'https://www.anthropic.com/news/claude-text-watermark',
     sourceName: 'Anthropic',
   },
@@ -77,11 +153,56 @@ export const CLAUDE_NEWS: NewsItem[] = [
       zh: 'Claude Code auto mode 成为 Pro / Max / Team 默认权限模式',
     },
     summary: {
-      en: 'Since Aug 14, new Claude Code sessions on Pro, Max, and Team run in auto mode — a classifier approves routine tool calls instead of prompting. Classifier token overhead is no longer charged on these plans; Enterprise and API access remain opt-in for now.',
-      zh: '自 8 月 14 日起，Pro / Max / Team 的新 Claude Code 会话默认进入 auto mode，由分类器自动放行常规工具调用而非逐条弹窗确认。上述套餐不再收取分类器 token 开销；Enterprise 与 API 接入仍为 opt-in。',
+      en: 'Since Aug 14, new Claude Code sessions on Pro, Max, and Team run in auto mode — a background classifier approves routine tool calls instead of prompting every command. Classifier token overhead is no longer charged on these plans; Enterprise and API access remain opt-in.',
+      zh: '自 8 月 14 日起，Pro / Max / Team 的新 Claude Code 会话默认进入 auto mode，由后台分类器自动放行常规工具调用而非逐条弹窗确认。上述套餐不再收取分类器 token 开销；Enterprise 与 API 接入仍为 opt-in。',
     },
+    takeaway: {
+      en: 'Pin `permissions.defaultMode` in `~/.claude/settings.json` if you need manual approval on sensitive repositories.',
+      zh: '若在敏感仓库需要人工审批，请在 `~/.claude/settings.json` 中固定 `permissions.defaultMode`。',
+    },
+    relatedGuideSlug: 'claude-code-and-api-safety',
     sourceUrl: 'https://claude.com/blog/auto-mode-default-in-claude-code',
     sourceName: 'Anthropic',
+  },
+  {
+    id: 'sonnet-5-permanent-pricing',
+    category: 'api',
+    publishedAt: '2026-08-10',
+    title: {
+      en: 'Claude Sonnet standard pricing ($2/$10) made permanent',
+      zh: 'Claude Sonnet 优惠价 $2/$10 定为永久标准定价',
+    },
+    summary: {
+      en: 'Anthropic cancelled the planned price increase to $3/$15 per million tokens. Sonnet stays at $2 input / $10 output per MTok as the permanent standard API price, offering unbeatable cost-performance for developer workflows.',
+      zh: 'Anthropic 取消原定涨价计划。Sonnet API 永久维持 $2 input / $10 output per MTok 的标准价，为高频自动化开发提供极具性价比的基础模型选择。',
+    },
+    takeaway: {
+      en: 'Combine Sonnet with prompt caching to reduce effective input costs down to $0.20 per million tokens on cache hits.',
+      zh: '搭配 Prompt Caching，Sonnet 命中缓存时的实际输入成本可低至 $0.20 / MTok。',
+    },
+    relatedGuideSlug: 'api-advanced-optimization',
+    sourceUrl: 'https://platform.claude.com/docs/en/about-claude/pricing',
+    sourceName: 'Anthropic Docs',
+  },
+  {
+    id: 'skill-plugin-security-scanning',
+    category: 'security',
+    publishedAt: '2026-08-06',
+    title: {
+      en: 'Enterprise skill and plugin security scanning enters beta',
+      zh: 'Enterprise 技能与插件安全扫描（beta）上线',
+    },
+    summary: {
+      en: 'Enterprise plans can enable skill and plugin security scanning to automatically check third-party skills and plugins for malicious content when someone uploads or edits them.',
+      zh: 'Enterprise 套餐可开启技能与插件安全扫描，在用户上传或编辑第三方 Skill / Plugin 时自动检测恶意内容。',
+    },
+    takeaway: {
+      en: 'Enable scanning in org settings before allowing members to install community skills in production workspaces.',
+      zh: '在允许成员安装社区 Skill 前，先在组织设置中启用扫描策略。',
+    },
+    relatedGuideSlug: 'automation-safety-practices',
+    sourceUrl: 'https://docs.anthropic.com/en/release-notes/claude-apps',
+    sourceName: 'Anthropic Help Center',
   },
   {
     id: 'fable-5-biology-safeguards',
@@ -95,22 +216,12 @@ export const CLAUDE_NEWS: NewsItem[] = [
       en: 'Anthropic retuned Fable 5\'s biology safety classifiers so benign health and education queries trigger fewer fallbacks to Opus 5 — about 85% fewer biology-related fallbacks in testing. Dual-use requests (virology, toxicology, molecular design) still route to the less capable model; trusted-access pathways for frontier biology remain in development.',
       zh: 'Anthropic 重调 Fable 5 生物安全分类器，日常健康与教育类问题更少误触发 fallback 至 Opus 5——测试中生物相关 fallback 减少约 85%。双重用途请求（病毒学、毒理学、分子设计等）仍会路由至能力较低的模型；面向前沿生物能力的可信访问通道仍在建设中。',
     },
+    takeaway: {
+      en: 'Educational biology questions no longer suffer artificial performance throttling or unexpected model switching.',
+      zh: '常规生物医学学习与问答不再容易触发异常降级，保障了学术研究的连贯性。',
+    },
+    relatedGuideSlug: 'claude-steganography-and-risk-model',
     sourceUrl: 'https://www.anthropic.com/news/improving-fable-5-s-biology-safeguards',
-    sourceName: 'Anthropic',
-  },
-  {
-    id: 'sonnet-5-permanent-pricing',
-    category: 'api',
-    publishedAt: '2026-08-10',
-    title: {
-      en: 'Claude Sonnet 5 introductory pricing ($2/$10) made permanent',
-      zh: 'Claude Sonnet 5 优惠价 $2/$10 定为永久定价',
-    },
-    summary: {
-      en: 'Anthropic cancelled the planned Sep 1 increase to $3/$15 per million tokens. Sonnet 5 stays at $2 input / $10 output per MTok as the standard API price.',
-      zh: 'Anthropic 取消原定于 9 月 1 日执行的 $3/$15 涨价。Sonnet 5 API 永久维持 $2 input / $10 output per MTok 的标准价。',
-    },
-    sourceUrl: 'https://www.anthropic.com/news/claude-sonnet-5',
     sourceName: 'Anthropic',
   },
   {
@@ -125,22 +236,72 @@ export const CLAUDE_NEWS: NewsItem[] = [
       en: 'Anthropic ended support for claude-opus-4-1-20250805 after a 60-day deprecation window. API calls to the old model ID now return errors; Opus 4.8 and Opus 5 are the recommended replacements.',
       zh: 'Anthropic 在 60 天弃用期后停止支持 claude-opus-4-1-20250805。旧 model ID 的 API 调用现已报错；推荐迁移至 Opus 4.8 或 Opus 5。',
     },
+    takeaway: {
+      en: 'Check your API configuration files and update hardcoded model strings to prevent runtime 400 errors.',
+      zh: '请检查工程配置文件，及时替换硬编码的旧模型名称，避免运行时 400 报错。',
+    },
+    relatedGuideSlug: 'troubleshooting-guide',
     sourceUrl: 'https://platform.claude.com/docs/en/about-claude/model-deprecations',
     sourceName: 'Anthropic Docs',
   },
   {
-    id: 'claude-opus-5',
+    id: 'claude-opus-5-launch',
     category: 'product',
     publishedAt: '2026-07-24',
     title: {
-      en: 'Anthropic releases Claude Opus 5 as new default on Pro and Max',
+      en: 'Anthropic releases Claude Opus 5 as default on Pro and Max',
       zh: 'Anthropic 发布 Claude Opus 5，成为 Pro 与 Max 默认模型',
     },
     summary: {
-      en: 'Opus 5 targets coding and knowledge work with thinking enabled by default. Available on Claude.ai, Claude Code, and the API at $5/$25 per million tokens — same pricing as Opus 4.8.',
-      zh: 'Opus 5 默认开启 thinking，面向编码与知识工作。已在 Claude.ai、Claude Code 与 API 上线，定价 $5/$25 per million tokens，与 Opus 4.8 相同。',
+      en: 'Claude Opus 5 (`claude-opus-5`) delivers near-Fable 5 intelligence at half the price, with 1M context, 128k max output, and adaptive thinking on by default. It is the default on Claude Max and the strongest model on Pro, priced at $5/$25 per MTok. Beta features include mid-conversation tool changes and automatic API fallbacks for safety-classifier refusals.',
+      zh: 'Claude Opus 5（`claude-opus-5`）以约为 Fable 5 一半的价格提供接近前沿的智能，具备 1M 上下文、128k 最大输出，并默认开启 adaptive thinking。其为 Claude Max 默认模型、Pro 最强模型，定价 $5/$25 per MTok。Beta 功能包括对话中途切换工具集，以及安全分类器拒答时的 API 自动 fallback。',
     },
+    takeaway: {
+      en: 'Enable `fallbacks` with `"default"` mode (beta) so flagged Opus 5 requests route to another model instead of hard-blocking.',
+      zh: '可启用 `fallbacks` 的 `"default"` 模式（beta），使被标记的 Opus 5 请求自动路由至备用模型而非硬阻断。',
+    },
+    relatedGuideSlug: 'domestic-and-open-source-alternatives',
     sourceUrl: 'https://www.anthropic.com/news/claude-opus-5',
+    sourceName: 'Anthropic',
+  },
+  {
+    id: 'claude-sonnet-5-launch',
+    category: 'product',
+    publishedAt: '2026-06-30',
+    title: {
+      en: 'Anthropic launches Claude Sonnet 5 with adaptive thinking and 1M context',
+      zh: 'Anthropic 发布 Claude Sonnet 5（默认自适应思考，1M 上下文）',
+    },
+    summary: {
+      en: 'Claude Sonnet 5 (`claude-sonnet-5`) is a drop-in upgrade over Sonnet 4.6 with 1M-token context, 128k max output, and adaptive thinking on by default. Manual extended thinking and non-default `temperature`/`top_p`/`top_k` now return 400 errors. A new tokenizer produces ~30% more tokens for the same text. Launch pricing was $2/$10 per MTok, later made permanent on Aug 10.',
+      zh: 'Claude Sonnet 5（`claude-sonnet-5`）是 Sonnet 4.6 的直接升级，支持 1M 上下文、128k 最大输出，并默认开启 adaptive thinking。手动 extended thinking 与非默认 `temperature`/`top_p`/`top_k` 现返回 400 错误。新 tokenizer 对相同文本约多计 30% token。首发定价 $2/$10 per MTok，8 月 10 日定为永久标准价。',
+    },
+    takeaway: {
+      en: 'Remove `thinking: {type: "enabled"}` and sampling params when migrating from Sonnet 4.6; use the `effort` parameter instead.',
+      zh: '从 Sonnet 4.6 迁移时移除 `thinking: {type: "enabled"}` 与采样参数，改用 `effort` 控制推理深度。',
+    },
+    relatedGuideSlug: 'api-advanced-optimization',
+    sourceUrl: 'https://www.anthropic.com/news/claude-sonnet-5',
+    sourceName: 'Anthropic',
+  },
+  {
+    id: 'claude-fable-5-mythos-5-launch',
+    category: 'product',
+    publishedAt: '2026-06-09',
+    title: {
+      en: 'Anthropic launches Claude Fable 5 and restricted Claude Mythos 5',
+      zh: 'Anthropic 发布 Claude Fable 5 与受限版 Claude Mythos 5',
+    },
+    summary: {
+      en: 'Claude Fable 5 (`claude-fable-5`) is Anthropic\'s most capable widely released model with 1M context, always-on adaptive thinking, and safety classifiers that can return `stop_reason: "refusal"`. Claude Mythos 5 shares the same base model with lifted safeguards for Project Glasswing partners. Access was briefly suspended June 12–July 1 due to export controls before global redeployment.',
+      zh: 'Claude Fable 5（`claude-fable-5`）是 Anthropic 目前面向公众的最强模型，具备 1M 上下文、始终开启的 adaptive thinking，以及可能返回 `stop_reason: "refusal"` 的安全分类器。Claude Mythos 5 为同一基座、面向 Project Glasswing 伙伴放宽部分护栏的版本。6 月 12 日至 7 月 1 日曾因出口管制短暂停服，随后全球恢复。',
+    },
+    takeaway: {
+      en: 'Use the opt-in `fallbacks` parameter (beta) to route refused Fable 5 requests to another model instead of hard-blocking.',
+      zh: '可通过 opt-in 的 `fallbacks` 参数（beta）将被拒 Fable 5 请求路由至备用模型，避免硬阻断。',
+    },
+    relatedGuideSlug: 'claude-steganography-and-risk-model',
+    sourceUrl: 'https://www.anthropic.com/news/claude-fable-5-mythos-5',
     sourceName: 'Anthropic',
   },
 ];

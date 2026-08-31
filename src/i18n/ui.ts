@@ -20,6 +20,7 @@ export const ui = {
     'nav.title': 'Fuck Claude',
     'nav.guides': 'Anti-Ban Guides',
     'nav.news': 'News',
+    'nav.about': 'About',
     'nav.home': 'Home',
 
     'news.title': 'Claude Latest News',
@@ -197,9 +198,12 @@ export const ui = {
     'trust.privacy.title': 'Privacy Policy',
     'trust.privacy.description':
       'How Fuck Claude handles local scans, Google Analytics, Google AdSense, and WebRTC STUN probing.',
+    'trust.terms.title': 'Terms of Service',
+    'trust.terms.description':
+      'Terms and conditions governing the educational and technical use of Fuck Claude.',
     'trust.about.title': 'About',
     'trust.about.description':
-      'Who runs Fuck Claude, why it exists, and its relationship to Anthropic.',
+      'Who runs Fuck Claude, why it exists, editorial standards, and its relationship to Anthropic.',
     'trust.contact.title': 'Contact',
     'trust.contact.description':
       'Reach LinXiaoTao by email, GitHub Issues, or social media.',
@@ -216,6 +220,7 @@ export const ui = {
       'Open sourced under the MIT License — redistributions must keep the original project notice.',
     'footer.repo': 'Original project',
     'footer.privacy': 'Privacy',
+    'footer.terms': 'Terms',
     'footer.about': 'About',
     'footer.contact': 'Contact',
 
@@ -254,6 +259,7 @@ export const ui = {
     'nav.title': 'Fuck Claude',
     'nav.guides': '防封指南',
     'nav.news': '最新动态',
+    'nav.about': '关于本站',
     'nav.home': '首页',
 
     'news.title': 'Claude 最新动态',
@@ -427,8 +433,11 @@ export const ui = {
     'trust.privacy.title': '隐私政策',
     'trust.privacy.description':
       'Fuck Claude 如何处理本地检测、Google Analytics、Google AdSense 与 WebRTC STUN 探测。',
+    'trust.terms.title': '服务条款',
+    'trust.terms.description':
+      '使用 Fuck Claude 诊断工具与知识库的法律条款、用户责任与免责声明。',
     'trust.about.title': '关于本站',
-    'trust.about.description': 'Fuck Claude 的运营者、项目目的及其与 Anthropic 的关系。',
+    'trust.about.description': 'Fuck Claude 的运营者、项目目的、编辑准则及其与 Anthropic 的关系。',
     'trust.contact.title': '联系我们',
     'trust.contact.description': '通过电子邮件、GitHub Issues 或社交媒体联系 LinXiaoTao。',
 
@@ -442,6 +451,7 @@ export const ui = {
     'footer.license': '基于 MIT 协议开源 —— 二次发布请保留原项目署名。',
     'footer.repo': 'GitHub 原项目',
     'footer.privacy': '隐私政策',
+    'footer.terms': '服务条款',
     'footer.about': '关于',
     'footer.contact': '联系',
 
