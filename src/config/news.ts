@@ -26,6 +26,85 @@ export const NEWS_CATEGORIES: Record<NewsCategory, { en: string; zh: string }> =
 
 export const CLAUDE_NEWS: NewsItem[] = [
   {
+    id: 'claude-code-managed-mcp-headless',
+    category: 'product',
+    publishedAt: '2026-09-02',
+    title: {
+      en: 'Claude Code 2.1.259 adds org-managed MCP servers and headless permission controls',
+      zh: 'Claude Code 2.1.259 上线组织托管 MCP 与无头权限控制',
+    },
+    summary: {
+      en: 'Claude Code 2.1.259 introduces `managedMcpServers`: organizations can provision HTTP/SSE MCP servers to every user (same shape as `.mcp.json`; command-based entries are skipped). `allowedMcpServers` now governs only user-added servers. For CI and unattended hosts, `--permission-prompts none` auto-denies anything that would prompt while the active permission mode (including auto mode) still applies. GitLab merge-request commands (`glab mr create/merge/close/reopen/note/update`) are recognized in tool summaries.',
+      zh: 'Claude Code 2.1.259 新增 `managedMcpServers`：组织可向所有用户下发 HTTP/SSE MCP 服务器（格式同 `.mcp.json`，需执行命令的条目会被跳过）。`allowedMcpServers` 现仅约束用户自行添加的服务器。CI 与无头环境可用 `--permission-prompts none` 自动拒绝一切需弹窗确认的操作，当前权限模式（含 auto mode）仍生效。工具摘要亦识别 GitLab MR 命令（`glab mr create/merge/close/reopen/note/update`）。',
+    },
+    takeaway: {
+      en: 'Enterprise admins should centralize approved MCP endpoints via managed settings instead of relying on per-user `.mcp.json` copies.',
+      zh: 'Enterprise 管理员应通过托管设置集中下发受信 MCP 端点，避免依赖用户各自维护 `.mcp.json`。',
+    },
+    relatedGuideSlug: 'automation-safety-practices',
+    sourceUrl: 'https://github.com/anthropics/claude-code/releases/tag/v2.1.259',
+    sourceName: 'Anthropic',
+  },
+  {
+    id: 'fable-5-1-mythos-5-1-launch',
+    category: 'product',
+    publishedAt: '2026-09-01',
+    title: {
+      en: 'Claude Fable 5.1 and Mythos 5.1 launch with lower cache-read pricing',
+      zh: 'Claude Fable 5.1 与 Mythos 5.1 发布，缓存读取降价',
+    },
+    summary: {
+      en: 'Anthropic released Claude Fable 5.1 (`claude-fable-5-1`) and Claude Mythos 5.1 (`claude-mythos-5-1`): 1M context, 128k max output, always-on adaptive thinking, at $10/$50 per MTok with cache reads cut to $0.25/MTok (0.025× input vs 0.1× on other models). Fable 5.1 is GA on the API and cloud partners; Mythos 5.1 stays on trusted-access programs. API changes include no `tool_choice` types `any`/`tool`, stricter thinking-block replay binding for accounts created on or after Aug 31, 2026, and beta per-message effort and turn-scoped system messages. Claude Code 2.1.257 sets Fable 5.1 as the default Fable model.',
+      zh: 'Anthropic 发布 Claude Fable 5.1（`claude-fable-5-1`）与 Claude Mythos 5.1（`claude-mythos-5-1`）：1M 上下文、128k 最大输出、始终开启 adaptive thinking，定价 $10/$50 per MTok，缓存读取降至 $0.25/MTok（为输入价的 0.025×，其他模型为 0.1×）。Fable 5.1 在 API 与云伙伴平台 GA；Mythos 5.1 仍限可信访问计划。API 变更包括不支持 `tool_choice` 的 `any`/`tool`、2026-08-31 后新建账号的更严格 thinking block 重放绑定，以及 beta 的逐消息 effort 与 turn-scoped system message。Claude Code 2.1.257 将 Fable 5.1 设为默认 Fable 模型。',
+    },
+    takeaway: {
+      en: 'Agent workloads with heavy cache hits benefit most from Fable 5.1; audit `tool_choice` and multi-turn thinking replay before migrating production pipelines.',
+      zh: '缓存命中率高的 Agent 工作负载从 Fable 5.1 获益最大；生产迁移前请检查 `tool_choice` 与多轮 thinking block 重放逻辑。',
+    },
+    relatedGuideSlug: 'api-advanced-optimization',
+    sourceUrl: 'https://platform.claude.com/docs/en/release-notes/overview',
+    sourceName: 'Anthropic Docs',
+  },
+  {
+    id: 'model-hardware-standard-preview',
+    category: 'product',
+    publishedAt: '2026-08-27',
+    title: {
+      en: 'Model Hardware Standard research preview opens for labs and manufacturers',
+      zh: 'Model Hardware Standard 研究预览向实验室与制造商开放',
+    },
+    summary: {
+      en: 'Anthropic opened a research preview of the Model Hardware Standard (MHS), a shared specification for AI agents to operate physical devices such as microscopes, liquid handlers, and robotic arms. MHS is model-agnostic and reachable via MCP, CLI, or code APIs; access is invite-only for scientific research labs and advanced manufacturers ahead of an open-source release. Early partners report faster device integration, quicker experiment iteration, and live fault detection.',
+      zh: 'Anthropic 开放 Model Hardware Standard（MHS）研究预览——一套供 AI Agent 操作显微镜、移液工作站、机械臂等物理设备的共享规范。MHS 与模型无关，可通过 MCP、CLI 或代码 API 接入；在开源发布前，仅向科研实验室与先进制造商邀请开放。早期伙伴反馈设备集成更快、实验迭代更敏捷，并支持在线故障检测。',
+    },
+    takeaway: {
+      en: 'MHS is not yet open source; lab and manufacturing teams should apply at modelhardwarestandard.com rather than building ad hoc device drivers.',
+      zh: 'MHS 尚未开源；实验室与制造团队应通过 modelhardwarestandard.com 申请接入，而非各自编写临时设备驱动。',
+    },
+    sourceUrl: 'https://www.anthropic.com/news/model-hardware-standard-research-preview',
+    sourceName: 'Anthropic',
+  },
+  {
+    id: 'cowork-built-in-browser-chrome-ga',
+    category: 'product',
+    publishedAt: '2026-08-26',
+    title: {
+      en: 'Cowork built-in browser ships; Claude in Chrome reaches GA with autonomous actions',
+      zh: 'Cowork 内置浏览器上线；Claude in Chrome GA 并支持自主操作',
+    },
+    summary: {
+      en: 'Claude Cowork on desktop now opens a dedicated side-panel browser for web tasks—no extension required; it rolls out to Pro, Max, and Team on macOS, Windows, and Linux (beta), with Enterprise admins controlling access in Organization settings. Separately, Claude in Chrome is GA on all paid plans: Claude can read pages, navigate, and act autonomously in the user\'s Chrome session, with a safety classifier validating each action. Enterprise Chrome extension defaults flip to enabled on Sep 10, 2026 unless already disabled.',
+      zh: 'Claude Cowork 桌面版现可在侧栏打开独立浏览器处理网页任务，无需扩展；向 Pro / Max / Team 逐步推送（macOS / Windows / Linux beta），Enterprise 管理员可在组织设置中管控。同期 Claude in Chrome 向全部付费套餐 GA：Claude 可在用户 Chrome 会话中读取页面、导航并自主操作，安全分类器逐条校验动作。Enterprise 扩展默认将于 2026-09-10 改为开启（若此前未手动关闭）。',
+    },
+    takeaway: {
+      en: 'Pick built-in browser for isolated web handoffs and Claude in Chrome when you need existing logged-in sessions; review org browser policies before Sep 10.',
+      zh: '隔离式网页任务用内置浏览器，需复用已登录会话时用 Claude in Chrome；请在 9 月 10 日前确认组织的浏览器策略。',
+    },
+    relatedGuideSlug: 'automation-safety-practices',
+    sourceUrl: 'https://claude.com/blog/cowork-built-in-browser',
+    sourceName: 'Anthropic',
+  },
+  {
     id: 'sdk-files-skills-ga-and-api-keys',
     category: 'api',
     publishedAt: '2026-08-27',
